@@ -46,10 +46,15 @@ variable "subnet_ids" {
   }
 }
 
-# variable "security_group_ids" {
-#   description = "List of security group IDs to attach to instances."
-#   type        = list(string)
-# }
+variable "security_group_ids_cp" {
+  description = "List of security group IDs to attach to control plane instances."
+  type        = list(string)
+}
+
+variable "security_group_ids_worker" {
+  description = "List of security group IDs to attach to worker instances."
+  type        = list(string)
+}
 
 variable "root_volume_size" {
   description = "Size in GiB for the root EBS volume on all instances."

@@ -57,11 +57,11 @@ locals {
 resource "aws_instance" "control_plane" {
   count = var.control_plane_count
 
-  ami                  = data.aws_ami.ubuntu.id
-  instance_type        = var.control_plane_instance_type
-  subnet_id            = element(var.subnet_ids, count.index)
-  iam_instance_profile = aws_iam_instance_profile.ssm.name
-  # vpc_security_group_ids    = var.security_group_ids
+  ami                         = data.aws_ami.ubuntu.id
+  instance_type               = var.control_plane_instance_type
+  subnet_id                   = element(var.subnet_ids, count.index)
+  iam_instance_profile        = aws_iam_instance_profile.ssm.name
+  vpc_security_group_ids      = var.security_group_ids_cp
   associate_public_ip_address = false
   user_data                   = local.user_data
 
@@ -83,11 +83,11 @@ resource "aws_instance" "control_plane" {
 resource "aws_instance" "worker" {
   count = var.worker_count
 
-  ami                  = data.aws_ami.ubuntu.id
-  instance_type        = var.worker_instance_type
-  subnet_id            = element(var.subnet_ids, count.index)
-  iam_instance_profile = aws_iam_instance_profile.ssm.name
-  # vpc_security_group_ids    = var.security_group_ids
+  ami                         = data.aws_ami.ubuntu.id
+  instance_type               = var.worker_instance_type
+  subnet_id                   = element(var.subnet_ids, count.index)
+  iam_instance_profile        = aws_iam_instance_profile.ssm.name
+  vpc_security_group_ids      = var.security_group_ids_worker
   associate_public_ip_address = false
   user_data                   = local.user_data
 

@@ -15,6 +15,14 @@ module "vpc" {
 
 }
 
+module "security" {
+  source = "./modules/security"
+
+  name_prefix = var.name_prefix
+  vpc_id      = module.vpc.vpc_id
+  tags        = local.common_tags
+}
+
 module "ec2" {
   source = "./modules/ec2"
 
@@ -24,5 +32,7 @@ module "ec2" {
   control_plane_instance_type = var.control_plane_instance_type
   worker_instance_type        = var.worker_instance_type
   subnet_ids                  = values(module.vpc.private_subnet_ids)
+  security_group_ids_cp       = [module.security.control_plane_sg_id]
+  security_group_ids_worker   = [module.security.worker_sg_id]
   tags                        = local.common_tags
 }
