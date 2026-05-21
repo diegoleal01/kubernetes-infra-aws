@@ -1,5 +1,5 @@
 module "vpc" {
-  source = "../../terraform-aws-vpc/"
+  source = "../terraform-aws-vpc-remote"
 
   project_name           = var.project_name
   vpc_cidr_block         = var.vpc_cidr_block
@@ -13,4 +13,16 @@ module "vpc" {
     ManagedBy   = "Terraform"
   }
 
+}
+
+module "ec2" {
+  source = "./modules/ec2"
+
+  name_prefix                 = var.name_prefix
+  control_plane_count         = var.control_plane_count
+  worker_count                = var.worker_count
+  control_plane_instance_type = var.control_plane_instance_type
+  worker_instance_type        = var.worker_instance_type
+  subnet_ids                  = values(module.vpc.private_subnet_ids)
+  tags                        = local.common_tags
 }
