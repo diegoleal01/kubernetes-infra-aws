@@ -1,5 +1,5 @@
 module "vpc" {
-  source = "../terraform-aws-vpc-remote"
+  source = "github.com/diegoleal01/terraform-aws-vpc?ref=v1.0.1"
 
   project_name           = var.project_name
   vpc_cidr_block         = var.vpc_cidr_block
