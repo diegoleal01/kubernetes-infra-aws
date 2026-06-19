@@ -37,3 +37,14 @@ module "ec2" {
   security_group_ids_worker   = [module.security.worker_sg_id]
   tags                        = local.common_tags
 }
+
+module "balancer" {
+  source = "./modules/balancer"
+
+  name_prefix       = var.name_prefix
+  public_subnet_ids = values(module.vpc.public_subnet_ids)
+  vpc_id            = module.vpc.vpc_id
+  control_plane_ids = module.ec2.control_plane_ids
+  nlb_sg_id         = module.security.nlb_sg_id
+  tags              = local.common_tags
+}
