@@ -13,3 +13,8 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "nlb_allowed_cidr_blocks" {
+  description = "CIDR blocks allowed to reach the API server via the NLB (port 6443)."
+  type        = list(string)
+}

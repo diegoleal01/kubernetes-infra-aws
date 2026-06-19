@@ -63,3 +63,8 @@ variable "worker_instance_type" {
   description = "EC2 instance type for worker nodes."
   type        = string
 }
+
+variable "nlb_allowed_cidr_blocks" {
+  description = "CIDR blocks allowed to reach the API server via the NLB (port 6443)."
+  type        = list(string)
+}

@@ -18,9 +18,10 @@ module "vpc" {
 module "security" {
   source = "./modules/security"
 
-  name_prefix = var.name_prefix
-  vpc_id      = module.vpc.vpc_id
-  tags        = local.common_tags
+  name_prefix             = var.name_prefix
+  vpc_id                  = module.vpc.vpc_id
+  nlb_allowed_cidr_blocks = var.nlb_allowed_cidr_blocks
+  tags                    = local.common_tags
 }
 
 module "ec2" {

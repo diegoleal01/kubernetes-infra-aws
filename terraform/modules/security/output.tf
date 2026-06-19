@@ -7,3 +7,8 @@ output "worker_sg_id" {
   description = "ID of the security group for worker nodes."
   value       = aws_security_group.worker.id
 }
+
+output "nlb_sg_id" {
+  description = "Security group ID of the NLB."
+  value       = aws_security_group.nlb.id
+}
