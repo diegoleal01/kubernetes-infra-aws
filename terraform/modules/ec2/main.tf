@@ -45,6 +45,13 @@ resource "aws_iam_instance_profile" "ssm" {
   role = aws_iam_role.ssm.name
 }
 
+resource "aws_key_pair" "k8s" {
+  key_name   = "${var.name_prefix}-key"
+  public_key = file(pathexpand(var.public_key_path))
+
+  tags = var.tags
+}
+
 locals {
   user_data = <<-EOT
     #!/bin/bash
@@ -63,6 +70,7 @@ resource "aws_instance" "control_plane" {
   iam_instance_profile        = aws_iam_instance_profile.ssm.name
   vpc_security_group_ids      = var.security_group_ids_cp
   associate_public_ip_address = false
+  key_name                    = aws_key_pair.k8s.key_name
   user_data                   = local.user_data
 
   root_block_device {
@@ -89,6 +97,7 @@ resource "aws_instance" "worker" {
   iam_instance_profile        = aws_iam_instance_profile.ssm.name
   vpc_security_group_ids      = var.security_group_ids_worker
   associate_public_ip_address = false
+  key_name                    = aws_key_pair.k8s.key_name
   user_data                   = local.user_data
 
   root_block_device {
