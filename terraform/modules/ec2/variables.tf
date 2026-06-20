@@ -72,3 +72,8 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "public_key_path" {
+  description = "Path to the SSH public key to inject into EC2 instances (e.g., '~/.ssh/k8s-ansible.pub')."
+  type        = string
+}

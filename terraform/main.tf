@@ -35,6 +35,7 @@ module "ec2" {
   subnet_ids                  = values(module.vpc.private_subnet_ids)
   security_group_ids_cp       = [module.security.control_plane_sg_id]
   security_group_ids_worker   = [module.security.worker_sg_id]
+  public_key_path             = var.public_key_path
   tags                        = local.common_tags
 }
 

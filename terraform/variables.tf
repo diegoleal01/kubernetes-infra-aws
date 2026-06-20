@@ -68,3 +68,8 @@ variable "nlb_allowed_cidr_blocks" {
   description = "CIDR blocks allowed to reach the API server via the NLB (port 6443)."
   type        = list(string)
 }
+
+variable "public_key_path" {
+  description = "Path to the SSH public key to inject into EC2 instances (e.g., '~/.ssh/k8s-ansible.pub')."
+  type        = string
+}
