@@ -73,6 +73,10 @@ resource "aws_instance" "control_plane" {
   key_name                    = aws_key_pair.k8s.key_name
   user_data                   = local.user_data
 
+  metadata_options {
+    http_tokens = "required"
+  }
+
   root_block_device {
     volume_size = var.root_volume_size
     volume_type = "gp3"
@@ -99,6 +103,10 @@ resource "aws_instance" "worker" {
   associate_public_ip_address = false
   key_name                    = aws_key_pair.k8s.key_name
   user_data                   = local.user_data
+
+  metadata_options {
+    http_tokens = "required"
+  }
 
   root_block_device {
     volume_size = var.root_volume_size
