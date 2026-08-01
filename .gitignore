@@ -46,3 +46,9 @@ terraform.rc
 
 # Pre-commit file
 .pre-commit-config.yaml
+
+# Ansible inventory/group_vars generated at runtime by generate-inventory.sh
+ansible/inventory/hosts.ini
+ansible/group_vars/all.yaml
+!ansible/inventory/hosts.ini.example
+!ansible/group_vars/all.yaml.example
