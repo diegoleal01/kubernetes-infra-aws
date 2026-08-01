@@ -1,0 +1,5 @@
+- name: Apply common prerequisites to all nodes
+  hosts: all
+  become: true
+  roles:
+    - common
