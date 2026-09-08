@@ -1,0 +1,4 @@
+- name: Join secondary control plane
+  ansible.builtin.command:
+    cmd: "{{ hostvars[groups['control_plane'][0]]['bootstrap_cp_join_command'].stdout }}"
+    creates: /etc/kubernetes/kubelet.conf
