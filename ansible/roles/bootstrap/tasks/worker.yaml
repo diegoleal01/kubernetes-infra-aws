@@ -1,0 +1,4 @@
+- name: Join worker
+  ansible.builtin.command:
+    cmd: "{{ hostvars[groups['control_plane'][0]]['bootstrap_worker_join_command'].stdout }}"
+    creates: /etc/kubernetes/kubelet.conf

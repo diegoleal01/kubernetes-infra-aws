@@ -5,3 +5,15 @@
     - common
     - containerd
     - kubeadm
+
+- name: Bootstrap the Kubernetes control plane
+  hosts: control_plane
+  become: true
+  roles:
+    - bootstrap
+
+- name: Join worker nodes to the cluster
+  hosts: workers
+  become: true
+  roles:
+    - bootstrap
