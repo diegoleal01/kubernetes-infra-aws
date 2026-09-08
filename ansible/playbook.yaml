@@ -1,5 +1,6 @@
-- name: Apply common prerequisites to all nodes
+- name: Prepare all nodes with base OS and container runtime prerequisites
   hosts: all
   become: true
   roles:
     - common
+    - containerd
